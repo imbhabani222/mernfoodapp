@@ -10,7 +10,12 @@ const Card = (props) => {
   return (
     <div>
       <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
-        <img src={img} className="card-img-top" alt="..." />
+        <img
+          src={img}
+          className="card-img-top"
+          alt="..."
+          style={{ height: "120px", objectFit: "fill" }}
+        />
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">This is some important text</p>

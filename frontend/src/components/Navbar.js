@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const handleLogout=()=>{
+    localStorage.removeItem("authToken");
+    navigate("/login")
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -21,16 +26,44 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <Link className="nav-link" aria-current="page" to="/">
+            <div className="navbar-nav me-auto mb-2">
+              <Link className="nav-link active fs-5" aria-current="page" to="/">
                 Home
               </Link>
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-              <Link className="nav-link" to="/createuser">
-                Sign Up
-              </Link>
+              {localStorage.getItem("authToken") && (
+                <Link
+                  className="nav-link active fs-5"
+                  aria-current="page"
+                  to="/"
+                >
+                  My Orders
+                </Link>
+              )}
+            </div>
+
+            <div className="d-flex ">
+              {!localStorage.getItem("authToken") ? (
+                <>
+                  <Link className="btn bg-white text-success mx-1" to="/login">
+                    Login
+                  </Link>
+                  <Link
+                    className="btn bg-white text-success max-1"
+                    to="/createuser"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <div className="btn bg-white text-success mx-2" >
+                    My Cart
+                  </div>
+                  <div className="btn bg-white text-danger mx-2" onClick={handleLogout} >
+                    Logout
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
