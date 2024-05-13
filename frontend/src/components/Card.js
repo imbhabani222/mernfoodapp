@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = (props) => {
+  const { CategoryName, description, img, name, options } = props.filterData;
+
+  const filterOptions = options[0];
+  const priceOptions = Object.keys(filterOptions);
+
   return (
     <div>
       <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
-        <img
-          src="https://source.unsplash.com/random/900x700/?paneer"
-          className="card-img-top"
-          alt="..."
-        />
+        <img src={img} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
+          <h5 className="card-title">{name}</h5>
           <p className="card-text">This is some important text</p>
           <div className="container w-100">
             <select className="m-2 h-100  bg-success rounded">
@@ -24,12 +25,11 @@ const Card = () => {
               })}
             </select>
             <select className="m-2 h-100  bg-success rounded">
-              <option key={"half"} value={"half"}>
-                Half
-              </option>
-              <option key={"full"} value={"full"}>
-                Full
-              </option>
+              {priceOptions?.map((ele) => (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              ))}
             </select>
             <div className="d-inline h-100 fs-5">Total Price</div>
           </div>
