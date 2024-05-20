@@ -22,7 +22,7 @@ const Card = (props) => {
       }
     }
     console.log(food);
-    if (food !== []) {
+    if (food.length !== 0) {
       if (food.size === size) {
         console.log(size);
         await dispatch({

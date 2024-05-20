@@ -32,6 +32,7 @@ const Login = () => {
       if (!json.success) {
         alert("Enter Valid Credentials");
       } else {
+        localStorage.setItem("userEmail", loginCreds.email);
         localStorage.setItem("authToken", json.authToken);
         console.log(localStorage.getItem("authToken"));
         navigate("/");
